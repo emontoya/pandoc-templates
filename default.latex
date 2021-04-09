@@ -430,6 +430,25 @@ $if(logo)$
 $endif$
 $endif$
 
+% Custom code
+$if(show-logo-before-title)$
+\usepackage{etoolbox}
+$if(logo)$
+\makeatletter
+\providecommand{\titlelogo}[1]{% add subtitle to \maketitle
+  \pretocmd{\@title}{
+    \includegraphics[width=0.7\textwidth]{#1}
+    \\[0.2cm]
+  }{}{}
+}
+\makeatother
+$endif$
+
+$if(logo)$
+\titlelogo{$logo$}
+$endif$
+$endif$ % if(show-logo-before-title
+
 \begin{document}
 $if(has-frontmatter)$
 \frontmatter
@@ -438,6 +457,16 @@ $if(title)$
 $if(beamer)$
 \frame{\titlepage}
 $else$
+$if(debug-title-page)$
+\meaning\maketitle
+\newpage
+\makeatletter\meaning\HyOrg@maketitle\makeatother
+\newpage
+\makeatletter\meaning\@title\makeatother
+\newpage
+\makeatletter\meaning\Hy@maketitle@end\makeatother
+
+$endif$
 \maketitle
 $endif$
 $if(abstract)$
