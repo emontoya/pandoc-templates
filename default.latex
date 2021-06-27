@@ -423,10 +423,20 @@ $if(institute)$
 \institute{$for(institute)$$institute$$sep$ \and $endfor$}
 $endif$
 $if(titlegraphic)$
-\titlegraphic{\includegraphics{$titlegraphic$}}
+% Custom Code
+  $if(titlegraphic-options)$
+    \titlegraphic{\includegraphics[$for(titlegraphic-options)$$titlegraphic-options$$sep$,$endfor$]{$titlegraphic$}}
+  $else$
+    \titlegraphic{\includegraphics{$titlegraphic$}}
+  $endif$
 $endif$
 $if(logo)$
-\logo{\includegraphics{$logo$}}
+% Custom Code
+  $if(logo-options)$
+    \logo{\includegraphics[$for(logo-options)$$logo-options$$sep$,$endfor$]{$logo$}}
+  $else$
+    \logo{\includegraphics{$logo$}}
+  $endif$
 $endif$
 $endif$
 
